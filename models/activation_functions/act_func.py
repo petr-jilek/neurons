@@ -7,3 +7,4 @@ def sigmoid(input):
 
 def dsigmoid(input):
     return math.exp(input) / ((1 + math.exp(input)) ** 2)
+

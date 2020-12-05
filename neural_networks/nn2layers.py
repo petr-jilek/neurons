@@ -1,7 +1,8 @@
 import numpy as np
 
 """
-Neural network with numInputs inputs and numOutputs outputs.
+Neural network 2 layers.
+1 input layer, 1 output layer
 Biases.
 Activation functions.
 """
