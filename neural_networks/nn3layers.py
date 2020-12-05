@@ -10,16 +10,31 @@ Activation functions.
 
 
 class NeutralNetwork(object):
-    def __init__(self, numInputs, numHidden, numOutputs, w1Matrix, w2Matrix, biases1, biases2, actFunc, dActFunc):
+    def __init__(self, numInputs, numHidden, numOutputs, actFunc, dActFunc,
+                 w1Matrix=None, w2Matrix=None, biases1=None, biases2=None):
         self.numInput = numInputs
         self.numHidden = numHidden
         self.numOutputs = numOutputs
-        self.w1Matrix = w1Matrix
-        self.w2Matrix = w2Matrix
-        self.biases1 = biases1
-        self.biases2 = biases2
         self.actFunc = actFunc
         self.dActFunc = dActFunc
+
+        if w1Matrix is None:
+            self.w1Matrix = np.random.rand(numHidden, numInputs)
+        else:
+            self.w1Matrix = w1Matrix
+        if w2Matrix is None:
+            self.w2Matrix = np.random.rand(numOutputs, numHidden)
+        else:
+            self.w2Matrix = w2Matrix
+
+        if biases1 is None:
+            self.biases1 = np.random.rand(numHidden)
+        else:
+            self.biases1 = biases1
+        if biases2 is None:
+            self.biases2 = np.random.rand(numOutputs)
+        else:
+            self.biases2 = biases2
 
     def error(self, input, desiredOutput):
         output = self.forward(input)

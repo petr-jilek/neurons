@@ -17,7 +17,7 @@ biases2 = np.array([0.2, 0.4, 0.9, 0.8])
 input = np.array([1.5, -4, 8])
 desiredOutput = np.array([0.5, 0.4, 0.7, 0.1])
 
-nn = nn.NeutralNetwork(3, 4, 4, w1Matrix, w2Matrix, biases1, biases2, af.sigmoid, af.dsigmoid)
+nn = nn.NeutralNetwork(3, 4, 4, af.sigmoid, af.dsigmoid, w1Matrix, w2Matrix, biases1, biases2)
 
 
 def run():
