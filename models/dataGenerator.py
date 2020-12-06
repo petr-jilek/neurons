@@ -2,12 +2,13 @@ import random
 import numpy as np
 
 """
-Random training and validation data generator
+Random training and validation data generator.
 """
 
 
+# Generate data function
 def generate(separationFunc, boundaryFunctions, numTrainingData=1000, numValidationData=1000):
-    """Generating training data"""
+    # Generating training data
     trainingX = []
     trainingY = []
     trainingDesiredOutsArray = []
@@ -33,7 +34,7 @@ def generate(separationFunc, boundaryFunctions, numTrainingData=1000, numValidat
         xDesired.append(x)
         yDesired.append(y)
 
-    """Generating validation data"""
+    # Generating validation data
     validationX = []
     validationY = []
     validationInputs = []
@@ -44,7 +45,7 @@ def generate(separationFunc, boundaryFunctions, numTrainingData=1000, numValidat
         validationY.append(y)
         validationInputs.append(np.array([x, y]))
 
-    """Creating dictionary for return"""
+    # Creating dictionary for return.
     dic = {
         "trainingX": trainingX,
         "trainingY": trainingY,

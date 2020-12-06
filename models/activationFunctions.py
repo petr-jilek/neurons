@@ -1,7 +1,7 @@
 import math
 
 """
-Activation function for neurons
+Activation functions for neural networks.
 """
 
 

@@ -1,3 +1,8 @@
+"""
+Required external packages for running:
+- numpy
+- matplotlib
+"""
 import random
 import math
 import numpy as np
@@ -11,11 +16,9 @@ import examples.separators.circleSeparator as cSep
 """Basic example of training neural network for desired output."""
 basicExample.run()
 
-
 """Example of linear separation."""
 # lSep.run(numTrainingData=10000, numValidationData=10000, learningRate=0.2)
 
 
 """Example of complex separation by circle."""
 # cSep.run(numTrainingData=30000, numValidationData=10000, hiddenNeurons=30, learningRate=1.5, showBoundaries=True)
-
