@@ -1,44 +1,50 @@
+import numpy as np
 import matplotlib.pyplot as plt
 import models.activationFunctions as af
+import neural_networks.nn2layers as nn
 import models.separationFunctions as sf
 import models.dataGenerator as generator
 
 """
-Points separation by circle with the center at x=0.5 and y=0.5.
+Points separation by one line example.
 """
+
+# Creating matrix of weights and vector of biases.
+# Matrix and biases don't have to be specified. If not neural network will generate random.
+matrix = np.array([[0.3, 0.7],
+                   [0.8, 0.2]])
+biases = np.array([0.1, 0.2])
+
+# Creating neural network with 2 inputs and 2 outputs neurons.
+# Using sigmoid activation function.
+nn = nn.NeutralNetwork(2, 2, af.sigmoid, af.dsigmoid, matrix, biases)
 
 
 # Run the example.
-def run(numTrainingData=20000, numValidationData=1000, hiddenNeurons=8, learningRate=2, showBoundaries=True):
-    import neural_networks.nn3layers as nn
-
-    # Creating neural network with 2 inputs, hidden neurons by variable and 2 outputs neurons.
-    # Using sigmoid activation function.
-    nn = nn.NeutralNetwork(2, hiddenNeurons, 2, af.sigmoid, af.dsigmoid)
-
+def run(numTrainingData=1000, numValidationData=1000, learningRate=0.5, showBoundaries=True):
     # Generating training and validation data.
-    data = generator.generate(sf.circleSeparationFunc, [sf.circleBoundaryFunction, sf.circleBoundaryFunction2],
+    data = generator.generate(separationFunc=sf.linearSeparationFunc, boundaryFunctions=[sf.linearBoundaryFunction],
                               numTrainingData=numTrainingData, numValidationData=numValidationData)
 
     # Training neural net.
-    for i in range(len(data["trainingInputs"])):
+    for i in range(numTrainingData):
         nn.backpropagate(data["trainingInputs"][i], data["trainingDesiredOuts"][i], learningRate)
 
     # Validating neural network.
     validationOuts = []
     correct = 0
     incorrect = 0
-    for i in range(len(data["validationInputs"])):
+    for i in range(numValidationData):
         out = nn.forward(data["validationInputs"][i])
         if out[0] > out[1]:
             validationOuts.append(1)
-            if sf.circleSeparationFunc(data["validationInputs"][i][0], data["validationInputs"][i][1]) == 1:
+            if sf.linearSeparationFunc(data["validationInputs"][i][0], data["validationInputs"][i][1]) == 1:
                 correct += 1
             else:
                 incorrect += 1
         else:
             validationOuts.append(0)
-            if sf.circleSeparationFunc(data["validationInputs"][i][0], data["validationInputs"][i][1]) == 0:
+            if sf.linearSeparationFunc(data["validationInputs"][i][0], data["validationInputs"][i][1]) == 0:
                 correct += 1
             else:
                 incorrect += 1
@@ -52,7 +58,6 @@ def run(numTrainingData=20000, numValidationData=1000, hiddenNeurons=8, learning
 
     if showBoundaries:
         plt.scatter(data["xDesired"][0], data["yDesired"][0], s=2, c='red')
-        plt.scatter(data["xDesired"][1], data["yDesired"][1], s=2, c='red')
 
     plt.xlim(0, 1)
     plt.ylim(0, 1)

@@ -1,5 +1,8 @@
 import numpy as np
 
+"""
+Help function, such as array converters and others
+"""
 
 def arrayToRowVector(array):
     vector = np.array([[i for i in array]])

@@ -1,6 +1,9 @@
 import random
-import math
 import numpy as np
+
+"""
+Random training and validation data generator
+"""
 
 
 def generate(separationFunc, boundaryFunctions, numTrainingData=1000, numValidationData=1000):
@@ -41,6 +44,7 @@ def generate(separationFunc, boundaryFunctions, numTrainingData=1000, numValidat
         validationY.append(y)
         validationInputs.append(np.array([x, y]))
 
+    """Creating dictionary for return"""
     dic = {
         "trainingX": trainingX,
         "trainingY": trainingY,

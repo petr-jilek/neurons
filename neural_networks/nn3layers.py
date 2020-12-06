@@ -74,7 +74,7 @@ class NeutralNetwork(object):
         deltaBiases2 = []
         for i in range(self.numOutputs):
             dCda2i = (2 / self.numOutputs) * (a2[i] - desiredOutput[i])
-            da2idz2i = a2[i] * (1 - a2[i])
+            da2idz2i = self.dActFunc(z2[i])
             dCdz2i = dCda2i * da2idz2i
             deltaBiases2.append(dCdz2i)
 
@@ -83,7 +83,7 @@ class NeutralNetwork(object):
 
         deltaBiases1V = np.dot(np.transpose(self.w2Matrix), deltaBiases2V)
         for i in range(self.numHidden):
-            deltaBiases1V[i][0] = deltaBiases1V[i][0] * a1[i] * (1 - a1[i])
+            deltaBiases1V[i][0] = deltaBiases1V[i][0] * self.dActFunc(z1[i])
 
         deltaWeights1V = np.dot(deltaBiases1V, np.transpose(inputV))
 
