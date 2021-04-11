@@ -17,11 +17,11 @@ Used python libraries:
 
 ## Structure of the project
 
-### neural networks
+### neural_networks
 Main components of the project. Here are implemented neural networks.
 
-### Models
+### models
 Logic files. For example definitions of activation functions etc.
 
-### Examples
+### examples
 Implemented examples like the separators.
